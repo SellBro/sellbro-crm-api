@@ -1,0 +1,22 @@
+{
+	"name": "sellbro-crm-api",
+	"version": "1.0.0",
+	"description": "sellbro crm api",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SellBro/sellbro-crm-api.git"
+	},
+	"keywords": [
+		"sellbro",
+		"crm"
+	],
+	"author": "youngrake",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/SellBro/sellbro-crm-api/issues"
+	},
+	"homepage": "https://github.com/SellBro/sellbro-crm-api#readme"
+}
