@@ -9,10 +9,16 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import is from 'utils/validations';
+
 import { FieldName, User } from '.';
 
 @Entity()
 class TableName extends BaseEntity {
+  static validations = {
+    name: [is.required(), is.maxLength(100)],
+  };
+
   @PrimaryGeneratedColumn()
   id: number;
 

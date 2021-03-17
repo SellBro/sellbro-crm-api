@@ -10,10 +10,16 @@ import {
 } from 'typeorm';
 
 import { FieldNameType } from 'utils/constants';
+import is from 'utils/validations';
 import { TableName, FieldValue } from '.';
 
 @Entity()
 class FieldName extends BaseEntity {
+  static validations = {
+    name: [is.required(), is.maxLength(100)],
+    type: [is.required(), is.oneOf(Object.values(FieldNameType))],
+  };
+
   @PrimaryGeneratedColumn()
   id: number;
 
