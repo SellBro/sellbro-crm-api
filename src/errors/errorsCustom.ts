@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 
-type ErrorData = { [key: string]: any };
-type ErrorCode = number | string;
+export type ErrorData = { [key: string]: any };
+export type ErrorCode = number | string;
 
 export enum Status {
   BAD_REQUEST = 400,
