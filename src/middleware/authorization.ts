@@ -3,7 +3,7 @@ import { Request } from 'express';
 import { validateToken } from 'utils/token';
 import { User } from 'entities';
 
-export const authorizeUser = catchErrors(async (req, _res, next) => {
+const authorizeUser = catchErrors(async (req, _res, next) => {
   const token = extractTokenFromRequest(req);
 
   if (!token) {
@@ -30,3 +30,5 @@ const extractTokenFromRequest = (req: Request): string | undefined => {
   const token = req.get('Authorization') || '';
   return token ? token : undefined;
 };
+
+export default authorizeUser;

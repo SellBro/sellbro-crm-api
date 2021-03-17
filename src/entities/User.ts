@@ -25,7 +25,6 @@ class User extends BaseEntity {
   @Column('varchar')
   username: string;
 
-  // TODO: add email validation
   @Column('varchar')
   email: string;
 
