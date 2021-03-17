@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "sellbro crm api",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "cd src && tsc"
   },
@@ -44,6 +43,10 @@
     "express": "^4.17.1",
     "module-alias": "^2.2.2",
     "pg": "^8.5.1",
+    "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.31"
-  }
+  },
+  "_moduleDirectories": [
+    "src"
+  ]
 }
