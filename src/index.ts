@@ -1,8 +1,11 @@
 import 'module-alias/register';
 import 'dotenv/config';
+import 'reflect-metadata';
 import express from 'express';
 
-const initExpress = () => {
+import createDbConnectionn from 'db/createDbConnection';
+
+const initExpress = (): void => {
   const app = express();
 
   app.use(express.json());
@@ -12,4 +15,17 @@ const initExpress = () => {
   console.log(`App started at url: ${process.env.BASE_URL}`);
 };
 
-initExpress();
+const establishDbConnection = async (): Promise<void> => {
+  try {
+    await createDbConnectionn();
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const initApp = async (): Promise<void> => {
+  await establishDbConnection();
+  initExpress();
+};
+
+initApp();
