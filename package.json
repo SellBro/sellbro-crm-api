@@ -4,7 +4,9 @@
   "description": "sellbro crm api",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "cd src && tsc"
+    "build": "cd src && tsc",
+    "start:dev": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js",
+    "start:prod": "NODE_PATH=./dist node ./dist/index.js"
   },
   "repository": {
     "type": "git",
