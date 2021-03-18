@@ -1,5 +1,11 @@
+import resetDb from 'db/resetDb';
 import { catchErrors } from 'errors/errorsCustom';
 
 export const testConnection = catchErrors(async (_req, res) => {
-  res.send({ message: 'Server is working' });
+  res.respond({}, 'Server is working');
+});
+
+export const resetDatabase = catchErrors(async (req, res) => {
+  await resetDb();
+  res.respond({}, 'Db reset');
 });
