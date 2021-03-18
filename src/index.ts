@@ -11,6 +11,7 @@ import { attachPublicRoutes, attachPrivateRoutes } from 'routes';
 import authorizeUser from 'middleware/authorization';
 import handleError from 'middleware/handleError';
 import addRespondToResponse from 'middleware/respond';
+import { RouteNotFoundError } from 'errors';
 
 const initExpress = (): void => {
   const app = express();
@@ -25,6 +26,7 @@ const initExpress = (): void => {
   app.use('/', authorizeUser);
   attachPrivateRoutes(app);
 
+  app.use((req, _res, next) => next(new RouteNotFoundError(req.originalUrl)));
   app.use(handleError);
 
   app.listen(process.env.PORT || 8000);

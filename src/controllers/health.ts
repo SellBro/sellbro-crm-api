@@ -5,7 +5,7 @@ export const testConnection = catchErrors(async (_req, res) => {
   res.respond({}, 'Server is working');
 });
 
-export const resetDatabase = catchErrors(async (req, res) => {
+export const resetDatabase = catchErrors(async (_req, res) => {
   await resetDb();
   res.respond({}, 'Db reset');
 });

@@ -8,10 +8,15 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import is from 'utils/validations';
 import { FieldName } from '.';
 
 @Entity()
 class FieldValue extends BaseEntity {
+  static validations = {
+    fieldNameId: is.required(),
+  };
+
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -26,6 +31,9 @@ class FieldValue extends BaseEntity {
 
   @ManyToOne(() => FieldName, (fieldName) => fieldName.fieldValues)
   fieldName: FieldName;
+
+  @Column('integer')
+  fieldNameId: number;
 }
 
 export default FieldValue;

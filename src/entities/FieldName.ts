@@ -18,6 +18,7 @@ class FieldName extends BaseEntity {
   static validations = {
     name: [is.required(), is.maxLength(100)],
     type: [is.required(), is.oneOf(Object.values(FieldNameType))],
+    tableNameId: is.required(),
   };
 
   @PrimaryGeneratedColumn()
@@ -37,6 +38,9 @@ class FieldName extends BaseEntity {
 
   @ManyToOne(() => TableName, (tableName) => tableName.fieldNames)
   tableName: number;
+
+  @Column('integer')
+  tableNameId: number;
 
   @OneToMany(() => FieldValue, (fieldValue) => fieldValue.fieldName)
   fieldValues: FieldValue[];

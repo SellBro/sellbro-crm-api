@@ -1,3 +1,4 @@
+import bcryptjs from 'bcryptjs';
 import {
   BaseEntity,
   Column,
@@ -22,10 +23,10 @@ class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('varchar')
+  @Column('varchar', { default: 'New User' })
   username: string;
 
-  @Column('varchar')
+  @Column('varchar', { unique: true })
   email: string;
 
   @Column('varchar')
@@ -39,6 +40,14 @@ class User extends BaseEntity {
 
   @OneToMany(() => TableName, (table) => table.user)
   tables: TableName[];
+
+  hashPassword() {
+    this.password = bcryptjs.hashSync(this.password, 8);
+  }
+
+  checkIfPasswordMatch(input: string) {
+    return bcryptjs.compareSync(input, this.password);
+  }
 }
 
 export default User;

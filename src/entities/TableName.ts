@@ -17,6 +17,7 @@ import { FieldName, User } from '.';
 class TableName extends BaseEntity {
   static validations = {
     name: [is.required(), is.maxLength(100)],
+    userId: is.required(),
   };
 
   @PrimaryGeneratedColumn()
@@ -33,6 +34,9 @@ class TableName extends BaseEntity {
 
   @ManyToOne(() => User, (user) => user.tables)
   user: User;
+
+  @Column('integer')
+  userId: number;
 
   @OneToMany(() => FieldName, (fieldName) => fieldName.tableName)
   fieldNames: FieldName[];
