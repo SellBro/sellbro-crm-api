@@ -1,6 +1,9 @@
 type Value = any;
 type ErrorMessage = false | string;
 type FieldValues = { [key: string]: Value };
+type Validator = (value: Value, fieldValues?: FieldValues) => ErrorMessage;
+type FieldValidators = { [key: string]: Validator | Validator[] };
+type FieldErrors = { [key: string]: string };
 
 const is = {
   match: (testFn: Function, message = '') => (
@@ -26,5 +29,23 @@ const is = {
 
 const isNilOrEmptyString = (value: Value): boolean =>
   value === undefined || value === null || value === '';
+
+export const generateErrors = (
+  fieldValues: FieldValues,
+  fieldValidators: FieldValidators,
+): FieldErrors => {
+  const fieldErrors: FieldErrors = {};
+
+  Object.entries(fieldValidators).forEach(([fieldName, validators]) => {
+    [validators].flat().forEach((validator) => {
+      const errorMessage = validator(fieldValues[fieldName], fieldValues);
+
+      if (errorMessage !== false && !fieldErrors[fieldName]) {
+        fieldErrors[fieldName] = errorMessage;
+      }
+    });
+  });
+  return fieldErrors;
+};
 
 export default is;
