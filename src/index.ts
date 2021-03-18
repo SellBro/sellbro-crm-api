@@ -6,10 +6,11 @@ import cors from 'cors';
 
 import createDbConnectionn from 'db/createDbConnection';
 
-import { attachPublicRoutes } from 'routes';
+import { attachPublicRoutes, attachPrivateRoutes } from 'routes';
 
 import authorizeUser from 'middleware/authorization';
 import handleError from 'middleware/handleError';
+import addRespondToResponse from 'middleware/respond';
 
 const initExpress = (): void => {
   const app = express();
@@ -18,10 +19,12 @@ const initExpress = (): void => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
+  app.use(addRespondToResponse);
+
   attachPublicRoutes(app);
   app.use('/', authorizeUser);
+  attachPrivateRoutes(app);
 
-  app.use((_req, res) => res.status(404).send({ error: 'Route not found' }));
   app.use(handleError);
 
   app.listen(process.env.PORT || 8000);
