@@ -11,7 +11,7 @@ import {
 import is from 'utils/validations';
 import { FieldName } from '.';
 
-@Entity()
+@Entity('field_value')
 class FieldValue extends BaseEntity {
   static validations = {
     fieldNameId: is.required(),

@@ -13,7 +13,7 @@ import { FieldNameType } from 'utils/constants';
 import is from 'utils/validations';
 import { TableName, FieldValue } from '.';
 
-@Entity()
+@Entity('field_name')
 class FieldName extends BaseEntity {
   static validations = {
     name: [is.required(), is.maxLength(100)],

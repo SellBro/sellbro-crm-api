@@ -13,7 +13,7 @@ import is from 'utils/validations';
 
 import { TableName } from '.';
 
-@Entity()
+@Entity('user')
 class User extends BaseEntity {
   static validations = {
     email: [is.required(), is.email()],
