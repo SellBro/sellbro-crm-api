@@ -34,6 +34,9 @@ class FieldValue extends BaseEntity {
 
   @Column('integer')
   fieldNameId: number;
+
+  @Column('integer')
+  userId: number;
 }
 
 export default FieldValue;

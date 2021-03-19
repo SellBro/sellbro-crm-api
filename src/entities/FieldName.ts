@@ -44,6 +44,9 @@ class FieldName extends BaseEntity {
 
   @OneToMany(() => FieldValue, (fieldValue) => fieldValue.fieldName)
   fieldValues: FieldValue[];
+
+  @Column('integer')
+  userId: number;
 }
 
 export default FieldName;

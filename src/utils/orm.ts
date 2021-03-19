@@ -5,6 +5,7 @@ import { BadRequestError, EntityNotFoundError } from 'errors';
 import { FieldName, FieldValue, TableName, User } from 'entities';
 
 type EntityConstructor = typeof FieldName | typeof FieldValue | typeof TableName | typeof User;
+type EntityConstructorSafe = typeof FieldName | typeof FieldValue | typeof TableName;
 type EntityInstance = FieldName | FieldValue | TableName | User;
 
 const entities: { [key: string]: EntityConstructor } = { FieldName, FieldValue, TableName, User };
@@ -42,7 +43,7 @@ export const createEntity = async <T extends EntityConstructor>(
   return validateAndSaveEntity(instance as InstanceType<T>);
 };
 
-export const updateEntitySafe = async <T extends EntityConstructor>(
+export const updateEntitySafe = async <T extends EntityConstructorSafe>(
   Constructor: T,
   owner: number,
   id: number | string,
@@ -50,7 +51,7 @@ export const updateEntitySafe = async <T extends EntityConstructor>(
 ): Promise<InstanceType<T>> => {
   const instance = await findEntityOrThrow(Constructor, id);
 
-  if (instance instanceof TableName && !(instance.userId === owner)) {
+  if (isEntitySafe(instance) && !(instance.userId === owner)) {
     throw new EntityNotFoundError(Constructor.name);
   }
 
@@ -66,3 +67,6 @@ export const deleteEntity = async <T extends EntityConstructor>(
   await instance.remove();
   return instance;
 };
+
+const isEntitySafe = (instance: EntityInstance): boolean =>
+  instance instanceof FieldName || instance instanceof FieldValue || instance instanceof TableName;
