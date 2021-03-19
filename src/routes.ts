@@ -14,7 +14,9 @@ export const attachPublicRoutes = (app: Application): void => {
 };
 
 export const attachPrivateRoutes = (app: Application): void => {
+  app.get('/tables', tables.getTables);
   app.post('/tables', tables.create);
+  app.put('/tables/:tableNameId', tables.update);
 
   app.get('/me', user.getMe);
 };

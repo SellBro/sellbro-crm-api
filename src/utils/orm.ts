@@ -42,12 +42,18 @@ export const createEntity = async <T extends EntityConstructor>(
   return validateAndSaveEntity(instance as InstanceType<T>);
 };
 
-export const updateEntity = async <T extends EntityConstructor>(
+export const updateEntitySafe = async <T extends EntityConstructor>(
   Constructor: T,
+  owner: number,
   id: number | string,
   input: Partial<InstanceType<T>>,
 ): Promise<InstanceType<T>> => {
   const instance = await findEntityOrThrow(Constructor, id);
+
+  if (instance instanceof TableName && !(instance.userId === owner)) {
+    throw new EntityNotFoundError(Constructor.name);
+  }
+
   Object.assign(instance, input);
   return validateAndSaveEntity(instance);
 };
