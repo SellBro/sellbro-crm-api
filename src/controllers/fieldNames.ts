@@ -16,7 +16,7 @@ export const getFieldNames = catchErrors(async (req, res) => {
 
 export const create = catchErrors(async (req, res) => {
   const { tableNameId } = req.params;
-  const userId = req.user.id;
+  const { id: userId } = req.user;
 
   const fieldName = await createEntity(FieldName, { ...req.body, userId, tableNameId });
 

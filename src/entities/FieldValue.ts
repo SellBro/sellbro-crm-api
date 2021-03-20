@@ -23,6 +23,9 @@ class FieldValue extends BaseEntity {
   @Column('text')
   value: string;
 
+  @Column('integer')
+  listPosition: number;
+
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
