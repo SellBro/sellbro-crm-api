@@ -1,4 +1,4 @@
-import { createEntity, updateEntitySafe } from 'utils/orm';
+import { createEntity, findEntityOrThrow, updateEntitySafe } from 'utils/orm';
 import { catchErrors } from 'errors';
 import { TableName } from 'entities';
 
@@ -11,6 +11,16 @@ export const getTables = catchErrors(async (req, res) => {
     .getMany();
 
   res.respond({ tables });
+});
+
+export const getTableDetails = catchErrors(async (req, res) => {
+  const { tableNameId } = req.params;
+
+  const table = await findEntityOrThrow(TableName, tableNameId, {
+    relations: ['fieldNames', 'fieldNames.fieldValues'],
+  });
+
+  res.respond({ table });
 });
 
 export const create = catchErrors(async (req, res) => {

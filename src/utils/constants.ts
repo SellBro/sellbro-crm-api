@@ -1,6 +1,6 @@
 export enum FieldNameType {
-  INT = 'int',
-  TEXT = 'text',
-  CHECKBOX = 'checkbox',
-  DATE = 'date',
+  INT = 'INTEGER',
+  TEXT = 'TEXT',
+  CHECKBOX = 'BOOLEAN',
+  DATE = 'DATE',
 }
