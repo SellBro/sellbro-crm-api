@@ -29,7 +29,7 @@ export class BadRequestError extends CustomError {
 
 export class AuthorizationError extends CustomError {
   constructor(message = 'Authtentication token is invalid') {
-    super(message, 'Unaithorized', Status.UNAUTHORIZED);
+    super(message, 'Unauthorized', Status.UNAUTHORIZED);
   }
 }
 
@@ -41,7 +41,7 @@ export class EntityNotFoundError extends CustomError {
 
 export class RouteNotFoundError extends CustomError {
   constructor(originalUrl: string) {
-    super(`Route '${originalUrl}' does not exist.`, 'ROUTE_NOT_FOUND', 404);
+    super(`Route '${originalUrl}' does not exist.`, 'Route Not Found', 404);
   }
 }
 
