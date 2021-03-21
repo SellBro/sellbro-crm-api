@@ -6,6 +6,6 @@
 * NodeJS
 * ExpressJS
 * PostgreSQL/TypeORM
-* Bcryptjs
+* BcryptJS
 * Tsconfig-paths
 * Eslint/Prettier
