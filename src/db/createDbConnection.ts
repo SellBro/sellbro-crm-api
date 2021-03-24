@@ -8,7 +8,7 @@ const createDbConnection = (): Promise<Connection> =>
     url: process.env.DB_URL,
 
     entities: Object.values(entities),
-    synchronize: true,
+    //synchronize: true,
     ssl: {
       rejectUnauthorized: false,
     },
