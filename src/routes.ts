@@ -31,4 +31,5 @@ export const attachPrivateRoutes = (app: Application): void => {
   app.post('/fieldValues/:fieldNameId', fieldValues.create);
 
   app.get('/me', user.getMe);
+  app.get('/validate', auth.validateToken);
 };

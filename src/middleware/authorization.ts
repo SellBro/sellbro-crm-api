@@ -7,7 +7,7 @@ const authorizeUser = catchErrors(async (req, _res, next) => {
   const token = extractTokenFromRequest(req);
 
   if (!token) {
-    throw new AuthorizationError('Athorization token not found');
+    throw new AuthorizationError('Authorization token not found');
   }
 
   const userId = validateToken(token).sub;

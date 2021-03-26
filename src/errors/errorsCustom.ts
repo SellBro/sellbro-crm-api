@@ -28,7 +28,7 @@ export class BadRequestError extends CustomError {
 }
 
 export class AuthorizationError extends CustomError {
-  constructor(message = 'Authtentication token is invalid') {
+  constructor(message = 'Authentication token is invalid') {
     super(message, 'Unauthorized', Status.UNAUTHORIZED);
   }
 }

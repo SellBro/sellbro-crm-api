@@ -32,3 +32,7 @@ export const login = catchErrors(async (req, res) => {
 
   res.respond({ authToken });
 });
+
+export const validateToken = catchErrors(async (_req, res) => {
+  res.respond({}, 'Token is valid');
+});

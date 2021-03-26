@@ -5,7 +5,6 @@ import { isPlainObject } from 'lodash';
 import { AuthorizationError, CustomError } from 'errors';
 
 export const signToken = (payload: object, options?: SignOptions): string => {
-  console.log(process.env.NODE_ENV);
   return jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: process.env.NODE_ENV === 'production' ? '7 days' : '180 days',
     ...options,
