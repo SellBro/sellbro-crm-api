@@ -1,10 +1,15 @@
-import { catchErrors, EntityNotFoundError } from 'errors';
+import { BadRequestError, catchErrors, EntityNotFoundError } from 'errors';
 import { validateAndSaveEntity } from 'utils/orm';
 import { User } from 'entities';
 import { signToken } from 'utils/token';
 
 export const register = catchErrors(async (req, res) => {
   const { email, password } = req.body;
+
+  if (User.find({ email })) {
+    throw new BadRequestError({ email }, 'Account with same email already exists');
+  }
+
   let newUser = new User();
 
   newUser.email = email;

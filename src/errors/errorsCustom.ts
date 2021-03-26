@@ -22,8 +22,8 @@ export class CustomError extends Error {
 }
 
 export class BadRequestError extends CustomError {
-  constructor(errorData: ErrorData) {
-    super('Errors during validation', 'Bad Request', Status.BAD_REQUEST, errorData);
+  constructor(errorData: ErrorData, message = 'Errors during validation') {
+    super(message, 'Bad Request', Status.BAD_REQUEST, errorData);
   }
 }
 
