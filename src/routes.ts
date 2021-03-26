@@ -8,8 +8,11 @@ import * as tables from 'controllers/tables';
 import * as user from 'controllers/user';
 
 export const attachPublicRoutes = (app: Application): void => {
+  if (process.env.NODE_ENV === 'development') {
+    app.get('/reset', health.resetDatabase);
+  }
+
   app.get('/health', health.testConnection);
-  app.get('/reset', health.resetDatabase);
 
   app.post('/register', auth.register);
   app.post('/login', auth.login);

@@ -1,16 +1,8 @@
 {
   "name": "sellbro-crm-api",
-  "version": "1.0.0",
-  "engines": {
-    "node": "14.x"
-  },
-  "description": "sellbro crm api",
-  "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "tsc -p .",
-    "start:dev": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js",
-    "start:prod": "NODE_PATH=./dist node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js"
-  },
+  "author": "youngrake",
+  "license": "MIT",
+  "homepage": "https://github.com/SellBro/sellbro-crm-api#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SellBro/sellbro-crm-api.git"
@@ -19,12 +11,20 @@
     "sellbro",
     "crm"
   ],
-  "author": "youngrake",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/SellBro/sellbro-crm-api/issues"
   },
-  "homepage": "https://github.com/SellBro/sellbro-crm-api#readme",
+  "version": "1.0.0",
+  "engines": {
+    "node": "14.x"
+  },
+  "description": "sellbro crm api",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc -p .",
+    "start:dev": "npm run build && cross-env NODE_ENV=development node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js",
+    "start:prod": "cross-env NODE_ENV=production node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js"
+  },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.10",
@@ -34,6 +34,7 @@
     "@types/node": "^14.14.35",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.22.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.1.0",
