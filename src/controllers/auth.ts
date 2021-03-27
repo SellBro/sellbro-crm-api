@@ -6,7 +6,9 @@ import { signToken } from 'utils/token';
 export const register = catchErrors(async (req, res) => {
   const { email, password } = req.body;
 
-  if (User.find({ email })) {
+  const userExists = await User.findOne({ email });
+
+  if (userExists) {
     throw new BadRequestError({ email }, 'Account with same email already exists');
   }
 
