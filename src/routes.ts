@@ -1,4 +1,5 @@
-import { Application } from 'express';
+import express, { Application } from 'express';
+import path from 'path';
 
 import * as health from 'controllers/health';
 import * as auth from 'controllers/auth';
@@ -13,6 +14,7 @@ export const attachPublicRoutes = (app: Application): void => {
   }
 
   app.get('/health', health.testConnection);
+  app.use('/truejson', express.static(path.join(__dirname, 'images')));
 
   app.post('/register', auth.register);
   app.post('/login', auth.login);
