@@ -15,8 +15,10 @@ export const getTables = catchErrors(async (req, res) => {
 
 export const getTableDetails = catchErrors(async (req, res) => {
   const { tableNameId } = req.params;
+  const { id } = req.user;
 
   const table = await findEntityOrThrow(TableName, tableNameId, {
+    where: { userId: id },
     relations: ['fieldNames', 'fieldNames.fieldValues'],
   });
 
