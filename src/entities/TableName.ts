@@ -7,6 +7,7 @@ import {
   OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
+  BeforeInsert,
 } from 'typeorm';
 
 import is from 'utils/validations';
@@ -40,6 +41,11 @@ class TableName extends BaseEntity {
 
   @OneToMany(() => FieldName, (fieldName) => fieldName.tableName)
   fieldNames: FieldName[];
+
+  @BeforeInsert()
+  beforeInsertOperations() {
+    this.fieldNames = [];
+  }
 }
 
 export default TableName;
