@@ -1,6 +1,6 @@
 import { createEntity, findEntityOrThrow, updateEntitySafe } from 'utils/orm';
 import { catchErrors } from 'errors';
-import { TableName } from 'entities';
+import { TableName, FieldName } from 'entities';
 
 export const getTables = catchErrors(async (req, res) => {
   const { id } = req.user;
@@ -18,6 +18,12 @@ export const getTableDetails = catchErrors(async (req, res) => {
 
   const table = await findEntityOrThrow(TableName, tableNameId, {
     relations: ['fieldNames', 'fieldNames.fieldValues'],
+  });
+
+  table.fieldNames.map((fieldName: FieldName) => {
+    let upd = fieldName.fieldValues.sort((a, b) => (a.listPosition > b.listPosition ? 1 : -1));
+
+    return upd;
   });
 
   res.respond({ table });
